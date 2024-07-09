@@ -27,8 +27,8 @@ const MAX_RETRIES = 5;
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-// Configure multer for file uploads
-// const upload = multer({ dest: 'uploads/' });
+Configure multer for file uploads
+const upload = multer({ dest: 'uploads/' });
 
 const validateStoryPrompt = (prompt) => {
   const promptPattern = /tell me a story|write a story|create a story/i;
