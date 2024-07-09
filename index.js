@@ -17,7 +17,7 @@ app.listen(port, () => {
   console.log(`API listening on port is ${port} `)
 })
 app.use(cors());
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 // dotenv.config();
 
 // const apiKey = process.env.API_KEY;
