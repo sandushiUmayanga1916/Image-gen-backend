@@ -5,8 +5,8 @@ const dotenv = require('dotenv');
 // const cors = require('cors');
 const PDFDocument = require('pdfkit');
 const OpenAI = require('openai');
-const fs = require('fs');
-const path = require('path');
+// const fs = require('fs');
+// const path = require('path');
 const multer = require('multer');
 
 const app = express();
