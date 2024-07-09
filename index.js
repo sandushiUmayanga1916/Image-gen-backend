@@ -20,8 +20,8 @@ app.use(cors());
 app.use(bodyParser.json());
 dotenv.config();
 
-// const apiKey = process.env.API_KEY;
-// const openai = new OpenAI({ apiKey });
+const apiKey = process.env.API_KEY;
+const openai = new OpenAI({ apiKey });
 
 // const MAX_RETRIES = 5;
 
