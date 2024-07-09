@@ -18,7 +18,7 @@ app.listen(port, () => {
 })
 app.use(cors());
 app.use(bodyParser.json());
-// dotenv.config();
+dotenv.config();
 
 // const apiKey = process.env.API_KEY;
 // const openai = new OpenAI({ apiKey });
