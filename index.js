@@ -20,58 +20,58 @@ app.use(cors());
 app.use(bodyParser.json());
 dotenv.config();
 
-// const apiKey = process.env.API_KEY;
-// const openai = new OpenAI({ apiKey });
+const apiKey = process.env.API_KEY;
+const openai = new OpenAI({ apiKey });
 
-// const MAX_RETRIES = 5;
+const MAX_RETRIES = 5;
 
-// const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-// // Configure multer for file uploads
-// const upload = multer({ dest: 'uploads/' });
+// Configure multer for file uploads
+const upload = multer({ dest: 'uploads/' });
 
-// const validateStoryPrompt = (prompt) => {
-//   const promptPattern = /tell me a story|write a story|create a story/i;
-//   return promptPattern.test(prompt);
-// };
+const validateStoryPrompt = (prompt) => {
+  const promptPattern = /tell me a story|write a story|create a story/i;
+  return promptPattern.test(prompt);
+};
 
-// const makeChatRequest = async (message, retries = 0) => {
-//   try {
-//     const response = await axios.post(
-//       'https://api.openai.com/v1/chat/completions',
-//       {
-//         model: 'gpt-4o',
-//         messages: [
-//           { role: 'system', content: 'You are a story writer. Please write a creative story based on the following prompt. Only generate a story. Do not answer other types of questions.' },
-//           { role: 'user', content: message }
-//         ],
-//       },
-//       {
-//         headers: {
-//           'Content-Type': 'application/json',
-//           'Authorization': `Bearer ${apiKey}`,
-//         },
-//       }
-//     );
+const makeChatRequest = async (message, retries = 0) => {
+  try {
+    const response = await axios.post(
+      'https://api.openai.com/v1/chat/completions',
+      {
+        model: 'gpt-4o',
+        messages: [
+          { role: 'system', content: 'You are a story writer. Please write a creative story based on the following prompt. Only generate a story. Do not answer other types of questions.' },
+          { role: 'user', content: message }
+        ],
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+        },
+      }
+    );
 
-//     const content = response.data.choices[0].message.content;
+    const content = response.data.choices[0].message.content;
 
-//     if (!validateStoryPrompt(message)) {
-//       throw new Error('Invalid story prompt.');
-//     }
+    if (!validateStoryPrompt(message)) {
+      throw new Error('Invalid story prompt.');
+    }
 
-//     return content;
-//   } catch (error) {
-//     if (error.response && error.response.status === 429 && retries < MAX_RETRIES) {
-//       const retryAfter = parseInt(error.response.headers['retry-after'] || '1', 10);
-//       await delay(retryAfter * 1000);
-//       return makeChatRequest(message, retries + 1);
-//     } else {
-//       console.error('Error in makeChatRequest:', error.message || error);
-//       throw error;
-//     }
-//   }
-// };
+    return content;
+  } catch (error) {
+    if (error.response && error.response.status === 429 && retries < MAX_RETRIES) {
+      const retryAfter = parseInt(error.response.headers['retry-after'] || '1', 10);
+      await delay(retryAfter * 1000);
+      return makeChatRequest(message, retries + 1);
+    } else {
+      console.error('Error in makeChatRequest:', error.message || error);
+      throw error;
+    }
+  }
+};
 
 // const summarizeStory = async (story) => {
 //   try {
