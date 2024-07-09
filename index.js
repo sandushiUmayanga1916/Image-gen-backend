@@ -1,13 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const PDFDocument = require('pdfkit');
-const OpenAI = require('openai');
-const fs = require('fs');
-const path = require('path');
-const multer = require('multer');
+// const dotenv = require('dotenv');
+// const cors = require('cors');
+// const PDFDocument = require('pdfkit');
+// const OpenAI = require('openai');
+// const fs = require('fs');
+// const path = require('path');
+// const multer = require('multer');
 
 const app = express();
 const port = 4000;
