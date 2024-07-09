@@ -230,64 +230,64 @@ app.post('/api/regenerate-image', async (req, res) => {
   }
 });
 
-const describeImage = async (imageFilePath) => {
-  try {
-    const imageBuffer = fs.readFileSync(imageFilePath);
-    const base64Image = imageBuffer.toString('base64');
+// const describeImage = async (imageFilePath) => {
+//   try {
+//     const imageBuffer = fs.readFileSync(imageFilePath);
+//     const base64Image = imageBuffer.toString('base64');
 
-    const response = await openai.chat.completions.create({
-      model: "gpt-4o",
-      messages: [
-        {
-          role: "user",
-          content: [
-            {
-              type: "image_url",
-              image_url: {
-                url: `data:image/jpeg;base64,${base64Image}`
-              }
-            }
-          ]
-        },
-        {
-          role: "assistant",
-          content: [
-            {
-              type: "text",
-              text: "Create a detailed and creative story based on the image. The story should be at least 5 paragraphs long, describing the scene, characters, potential backstory, and imagined events related to the image."
-            }
-          ]
-        }
-      ],
-      temperature: 1,
-      max_tokens: 2000, // Increased to allow for longer responses
-      top_p: 1,
-      frequency_penalty: 0,
-      presence_penalty: 0,
-    });
+//     const response = await openai.chat.completions.create({
+//       model: "gpt-4o",
+//       messages: [
+//         {
+//           role: "user",
+//           content: [
+//             {
+//               type: "image_url",
+//               image_url: {
+//                 url: `data:image/jpeg;base64,${base64Image}`
+//               }
+//             }
+//           ]
+//         },
+//         {
+//           role: "assistant",
+//           content: [
+//             {
+//               type: "text",
+//               text: "Create a detailed and creative story based on the image. The story should be at least 5 paragraphs long, describing the scene, characters, potential backstory, and imagined events related to the image."
+//             }
+//           ]
+//         }
+//       ],
+//       temperature: 1,
+//       max_tokens: 2000, // Increased to allow for longer responses
+//       top_p: 1,
+//       frequency_penalty: 0,
+//       presence_penalty: 0,
+//     });
 
-    if (response && response.choices && response.choices.length > 0) {
-      const choice = response.choices[0];
-      if (choice && choice.message && typeof choice.message.content === 'string') {
-        const content = choice.message.content;
-        const paragraphs = content.split('\n\n').filter(p => p.trim().length > 0);
+//     if (response && response.choices && response.choices.length > 0) {
+//       const choice = response.choices[0];
+//       if (choice && choice.message && typeof choice.message.content === 'string') {
+//         const content = choice.message.content;
+//         const paragraphs = content.split('\n\n').filter(p => p.trim().length > 0);
         
-        if (paragraphs.length < 5) {
-          throw new Error('Generated content has less than 5 paragraphs');
-        }
+//         if (paragraphs.length < 5) {
+//           throw new Error('Generated content has less than 5 paragraphs');
+//         }
         
-        return content;
-      } else {
-        throw new Error('No valid message found in response');
-      }
-    } else {
-      throw new Error('Unexpected response structure');
-    }
-  } catch (error) {
-    console.error('Error in describeImage:', error.message || error);
-    throw error;
-  }
-};
+//         return content;
+//       } else {
+//         throw new Error('No valid message found in response');
+//       }
+//     } else {
+//       throw new Error('Unexpected response structure');
+//     }
+//   } catch (error) {
+//     console.error('Error in describeImage:', error.message || error);
+//     throw error;
+//   }
+// };
 
 app.post('/api/describe-image', upload.single('image'), async (req, res) => {
   if (!req.file) {
