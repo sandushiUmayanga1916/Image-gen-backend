@@ -16,7 +16,7 @@ const port = 4000;
 app.listen(port, () => {
   console.log(`API listening on port is ${port} `)
 })
-// app.use(cors());
+app.use(cors());
 // app.use(bodyParser.json());
 // dotenv.config();
 
