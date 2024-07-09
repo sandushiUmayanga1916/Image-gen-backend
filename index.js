@@ -1,6 +1,6 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const axios = require('axios');
+// const bodyParser = require('body-parser');
+// const axios = require('axios');
 // const dotenv = require('dotenv');
 // const cors = require('cors');
 // const PDFDocument = require('pdfkit');
@@ -14,7 +14,7 @@ const port = 4000;
 
 // Start the server and print the URLs
 app.listen(port, () => {
-  console.log(`API listening on port ${port} `)
+  console.log(`API listening on port is ${port} `)
 })
 // app.use(cors());
 // app.use(bodyParser.json());
