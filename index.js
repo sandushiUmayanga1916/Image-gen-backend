@@ -23,17 +23,17 @@ dotenv.config();
 const apiKey = process.env.API_KEY;
 const openai = new OpenAI({ apiKey });
 
-// const MAX_RETRIES = 5;
+const MAX_RETRIES = 5;
 
-// const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-// // Configure multer for file uploads
-// const upload = multer({ dest: 'uploads/' });
+// Configure multer for file uploads
+const upload = multer({ dest: 'uploads/' });
 
-// const validateStoryPrompt = (prompt) => {
-//   const promptPattern = /tell me a story|write a story|create a story/i;
-//   return promptPattern.test(prompt);
-// };
+const validateStoryPrompt = (prompt) => {
+  const promptPattern = /tell me a story|write a story|create a story/i;
+  return promptPattern.test(prompt);
+};
 
 // const makeChatRequest = async (message, retries = 0) => {
 //   try {
